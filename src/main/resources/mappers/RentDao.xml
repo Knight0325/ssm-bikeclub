@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.bikeclub.dao.RentDao">
+  <resultMap id="BaseResultMap" type="com.ssm.bikeclub.entity.Rent">
+    <id column="rent_id" jdbcType="INTEGER" property="rentId" />
+    <result column="rent_form" jdbcType="INTEGER" property="rentForm" />
+    <result column="rent_to" jdbcType="INTEGER" property="rentTo" />
+    <result column="rent_bikeinfo" jdbcType="INTEGER" property="rentBikeinfo" />
+    <result column="rent_starttime" jdbcType="TIME" property="rentStarttime" />
+    <result column="rent_endtime" jdbcType="TIME" property="rentEndtime" />
+    <result column="rent_remark" jdbcType="VARCHAR" property="rentRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    rent_id, rent_form, rent_to, rent_bikeinfo, rent_starttime, rent_endtime, rent_remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_ssm_rent
+    where rent_id = #{rentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_ssm_rent
+    where rent_id = #{rentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssm.bikeclub.entity.Rent">
+    insert into tb_ssm_rent (rent_id, rent_form, rent_to, 
+      rent_bikeinfo, rent_starttime, rent_endtime, 
+      rent_remark)
+    values (#{rentId,jdbcType=INTEGER}, #{rentForm,jdbcType=INTEGER}, #{rentTo,jdbcType=INTEGER}, 
+      #{rentBikeinfo,jdbcType=INTEGER}, #{rentStarttime,jdbcType=TIME}, #{rentEndtime,jdbcType=TIME}, 
+      #{rentRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.bikeclub.entity.Rent">
+    insert into tb_ssm_rent
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rentId != null">
+        rent_id,
+      </if>
+      <if test="rentForm != null">
+        rent_form,
+      </if>
+      <if test="rentTo != null">
+        rent_to,
+      </if>
+      <if test="rentBikeinfo != null">
+        rent_bikeinfo,
+      </if>
+      <if test="rentStarttime != null">
+        rent_starttime,
+      </if>
+      <if test="rentEndtime != null">
+        rent_endtime,
+      </if>
+      <if test="rentRemark != null">
+        rent_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rentId != null">
+        #{rentId,jdbcType=INTEGER},
+      </if>
+      <if test="rentForm != null">
+        #{rentForm,jdbcType=INTEGER},
+      </if>
+      <if test="rentTo != null">
+        #{rentTo,jdbcType=INTEGER},
+      </if>
+      <if test="rentBikeinfo != null">
+        #{rentBikeinfo,jdbcType=INTEGER},
+      </if>
+      <if test="rentStarttime != null">
+        #{rentStarttime,jdbcType=TIME},
+      </if>
+      <if test="rentEndtime != null">
+        #{rentEndtime,jdbcType=TIME},
+      </if>
+      <if test="rentRemark != null">
+        #{rentRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.bikeclub.entity.Rent">
+    update tb_ssm_rent
+    <set>
+      <if test="rentForm != null">
+        rent_form = #{rentForm,jdbcType=INTEGER},
+      </if>
+      <if test="rentTo != null">
+        rent_to = #{rentTo,jdbcType=INTEGER},
+      </if>
+      <if test="rentBikeinfo != null">
+        rent_bikeinfo = #{rentBikeinfo,jdbcType=INTEGER},
+      </if>
+      <if test="rentStarttime != null">
+        rent_starttime = #{rentStarttime,jdbcType=TIME},
+      </if>
+      <if test="rentEndtime != null">
+        rent_endtime = #{rentEndtime,jdbcType=TIME},
+      </if>
+      <if test="rentRemark != null">
+        rent_remark = #{rentRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rent_id = #{rentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.bikeclub.entity.Rent">
+    update tb_ssm_rent
+    set rent_form = #{rentForm,jdbcType=INTEGER},
+      rent_to = #{rentTo,jdbcType=INTEGER},
+      rent_bikeinfo = #{rentBikeinfo,jdbcType=INTEGER},
+      rent_starttime = #{rentStarttime,jdbcType=TIME},
+      rent_endtime = #{rentEndtime,jdbcType=TIME},
+      rent_remark = #{rentRemark,jdbcType=VARCHAR}
+    where rent_id = #{rentId,jdbcType=INTEGER}
+  </update>
+</mapper>

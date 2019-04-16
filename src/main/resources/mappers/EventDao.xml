@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.bikeclub.dao.EventDao">
+  <resultMap id="BaseResultMap" type="com.ssm.bikeclub.entity.Event">
+    <id column="event_id" jdbcType="INTEGER" property="eventId" />
+    <result column="event_item" jdbcType="VARCHAR" property="eventItem" />
+    <result column="event_info" jdbcType="VARCHAR" property="eventInfo" />
+    <result column="event_remark" jdbcType="VARCHAR" property="eventRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    event_id, event_item, event_info, event_remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_ssm_events
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_ssm_events
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssm.bikeclub.entity.Event">
+    insert into tb_ssm_events (event_id, event_item, event_info, 
+      event_remark)
+    values (#{eventId,jdbcType=INTEGER}, #{eventItem,jdbcType=VARCHAR}, #{eventInfo,jdbcType=VARCHAR}, 
+      #{eventRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.bikeclub.entity.Event">
+    insert into tb_ssm_events
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eventId != null">
+        event_id,
+      </if>
+      <if test="eventItem != null">
+        event_item,
+      </if>
+      <if test="eventInfo != null">
+        event_info,
+      </if>
+      <if test="eventRemark != null">
+        event_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eventId != null">
+        #{eventId,jdbcType=INTEGER},
+      </if>
+      <if test="eventItem != null">
+        #{eventItem,jdbcType=VARCHAR},
+      </if>
+      <if test="eventInfo != null">
+        #{eventInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="eventRemark != null">
+        #{eventRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.bikeclub.entity.Event">
+    update tb_ssm_events
+    <set>
+      <if test="eventItem != null">
+        event_item = #{eventItem,jdbcType=VARCHAR},
+      </if>
+      <if test="eventInfo != null">
+        event_info = #{eventInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="eventRemark != null">
+        event_remark = #{eventRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.bikeclub.entity.Event">
+    update tb_ssm_events
+    set event_item = #{eventItem,jdbcType=VARCHAR},
+      event_info = #{eventInfo,jdbcType=VARCHAR},
+      event_remark = #{eventRemark,jdbcType=VARCHAR}
+    where event_id = #{eventId,jdbcType=INTEGER}
+  </update>
+</mapper>

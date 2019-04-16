@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.bikeclub.dao.MoneyDao">
+  <resultMap id="BaseResultMap" type="com.ssm.bikeclub.entity.Money">
+    <id column="money_id" jdbcType="INTEGER" property="moneyId" />
+    <result column="money_num" jdbcType="DOUBLE" property="moneyNum" />
+    <result column="money_type" jdbcType="VARCHAR" property="moneyType" />
+    <result column="money_remark" jdbcType="VARCHAR" property="moneyRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    money_id, money_num, money_type, money_remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_ssm_money
+    where money_id = #{moneyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_ssm_money
+    where money_id = #{moneyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssm.bikeclub.entity.Money">
+    insert into tb_ssm_money (money_id, money_num, money_type, 
+      money_remark)
+    values (#{moneyId,jdbcType=INTEGER}, #{moneyNum,jdbcType=DOUBLE}, #{moneyType,jdbcType=VARCHAR}, 
+      #{moneyRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.bikeclub.entity.Money">
+    insert into tb_ssm_money
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="moneyId != null">
+        money_id,
+      </if>
+      <if test="moneyNum != null">
+        money_num,
+      </if>
+      <if test="moneyType != null">
+        money_type,
+      </if>
+      <if test="moneyRemark != null">
+        money_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="moneyId != null">
+        #{moneyId,jdbcType=INTEGER},
+      </if>
+      <if test="moneyNum != null">
+        #{moneyNum,jdbcType=DOUBLE},
+      </if>
+      <if test="moneyType != null">
+        #{moneyType,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyRemark != null">
+        #{moneyRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.bikeclub.entity.Money">
+    update tb_ssm_money
+    <set>
+      <if test="moneyNum != null">
+        money_num = #{moneyNum,jdbcType=DOUBLE},
+      </if>
+      <if test="moneyType != null">
+        money_type = #{moneyType,jdbcType=VARCHAR},
+      </if>
+      <if test="moneyRemark != null">
+        money_remark = #{moneyRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where money_id = #{moneyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.bikeclub.entity.Money">
+    update tb_ssm_money
+    set money_num = #{moneyNum,jdbcType=DOUBLE},
+      money_type = #{moneyType,jdbcType=VARCHAR},
+      money_remark = #{moneyRemark,jdbcType=VARCHAR}
+    where money_id = #{moneyId,jdbcType=INTEGER}
+  </update>
+</mapper>

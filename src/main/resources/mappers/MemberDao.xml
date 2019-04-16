@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssm.bikeclub.dao.MemberDao">
+  <resultMap id="BaseResultMap" type="com.ssm.bikeclub.entity.Member">
+    <id column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="member_gender" jdbcType="VARCHAR" property="memberGender" />
+    <result column="member_college" jdbcType="VARCHAR" property="memberCollege" />
+    <result column="member_qq" jdbcType="VARCHAR" property="memberQq" />
+    <result column="member_tel" jdbcType="VARCHAR" property="memberTel" />
+    <result column="member_position" jdbcType="VARCHAR" property="memberPosition" />
+    <result column="member_token" jdbcType="VARCHAR" property="memberToken" />
+    <result column="member_password" jdbcType="VARCHAR" property="memberPassword" />
+    <result column="member_remark" jdbcType="VARCHAR" property="memberRemark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    member_id, member_name, member_gender, member_college, member_qq, member_tel, member_position, 
+    member_token, member_password, member_remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_ssm_member
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_ssm_member
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ssm.bikeclub.entity.Member">
+    insert into tb_ssm_member (member_id, member_name, member_gender, 
+      member_college, member_qq, member_tel, 
+      member_position, member_token, member_password, 
+      member_remark)
+    values (#{memberId,jdbcType=INTEGER}, #{memberName,jdbcType=VARCHAR}, #{memberGender,jdbcType=VARCHAR}, 
+      #{memberCollege,jdbcType=VARCHAR}, #{memberQq,jdbcType=VARCHAR}, #{memberTel,jdbcType=VARCHAR}, 
+      #{memberPosition,jdbcType=VARCHAR}, #{memberToken,jdbcType=VARCHAR}, #{memberPassword,jdbcType=VARCHAR}, 
+      #{memberRemark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ssm.bikeclub.entity.Member">
+    insert into tb_ssm_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="memberGender != null">
+        member_gender,
+      </if>
+      <if test="memberCollege != null">
+        member_college,
+      </if>
+      <if test="memberQq != null">
+        member_qq,
+      </if>
+      <if test="memberTel != null">
+        member_tel,
+      </if>
+      <if test="memberPosition != null">
+        member_position,
+      </if>
+      <if test="memberToken != null">
+        member_token,
+      </if>
+      <if test="memberPassword != null">
+        member_password,
+      </if>
+      <if test="memberRemark != null">
+        member_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberGender != null">
+        #{memberGender,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCollege != null">
+        #{memberCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="memberQq != null">
+        #{memberQq,jdbcType=VARCHAR},
+      </if>
+      <if test="memberTel != null">
+        #{memberTel,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPosition != null">
+        #{memberPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="memberToken != null">
+        #{memberToken,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPassword != null">
+        #{memberPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="memberRemark != null">
+        #{memberRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ssm.bikeclub.entity.Member">
+    update tb_ssm_member
+    <set>
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberGender != null">
+        member_gender = #{memberGender,jdbcType=VARCHAR},
+      </if>
+      <if test="memberCollege != null">
+        member_college = #{memberCollege,jdbcType=VARCHAR},
+      </if>
+      <if test="memberQq != null">
+        member_qq = #{memberQq,jdbcType=VARCHAR},
+      </if>
+      <if test="memberTel != null">
+        member_tel = #{memberTel,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPosition != null">
+        member_position = #{memberPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="memberToken != null">
+        member_token = #{memberToken,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPassword != null">
+        member_password = #{memberPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="memberRemark != null">
+        member_remark = #{memberRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ssm.bikeclub.entity.Member">
+    update tb_ssm_member
+    set member_name = #{memberName,jdbcType=VARCHAR},
+      member_gender = #{memberGender,jdbcType=VARCHAR},
+      member_college = #{memberCollege,jdbcType=VARCHAR},
+      member_qq = #{memberQq,jdbcType=VARCHAR},
+      member_tel = #{memberTel,jdbcType=VARCHAR},
+      member_position = #{memberPosition,jdbcType=VARCHAR},
+      member_token = #{memberToken,jdbcType=VARCHAR},
+      member_password = #{memberPassword,jdbcType=VARCHAR},
+      member_remark = #{memberRemark,jdbcType=VARCHAR}
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+</mapper>
